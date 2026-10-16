@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InstaFlow • Dashboard Profesional de Scraping</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <!-- BARRA LATERAL N8N -->
+    <aside class="app-sidebar">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">⚡</div>
+        <div>
+          <div class="brand-title">InstaFlow</div>
+          <div class="brand-subtitle">Scraping & Analytics</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <li class="nav-item active">
+          <a href="/">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Detalle Perfil
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#gallery-section">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            Galería de Medios
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Configuración
+          </a>
+        </li>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div><strong>InstaFlow</strong> v1.0.0</div>
+        <div>Servidor local en Windows</div>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="app-main">
+      <!-- CABECERA SUPERIOR -->
+      <header class="app-header">
+        <div class="header-left">
+          <div class="header-badges">
+            <div class="status-badge">
+              <span id="dot-browser" class="status-dot"></span>
+              <span id="text-browser-status">Verificando navegador...</span>
+            </div>
+            <div class="status-badge">
+              <span id="dot-session" class="status-dot"></span>
+              <span id="text-session-status">Verificando sesión...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <span id="text-last-run" class="last-run-info">Sin ejecuciones previas</span>
+        </div>
+      </header>
+
+      <!-- CONTENIDO DEL DASHBOARD -->
+      <div class="dashboard-content">
+        <!-- PANEL DE ENTRADA DEL PERFIL -->
+        <section class="scraper-input-card">
+          <div class="input-row">
+            <div class="form-group flex-1">
+              <label class="form-label" for="input-username">Usuario de Instagram</label>
+              <div class="input-wrapper">
+                <span class="input-icon-prefix">@</span>
+                <input
+                  type="text"
+                  id="input-username"
+                  class="form-input"
+                  placeholder="ejemplo o https://instagram.com/ejemplo"
+                  value="{{ default_username }}"
+                  autocomplete="off"
+                  spellcheck="false"
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="select-limit">Límite de publicaciones</label>
+              <select id="select-limit" class="form-select">
+                <option value="10">10 publicaciones</option>
+                <option value="12" selected>12 publicaciones</option>
+                <option value="20">20 publicaciones</option>
+                <option value="50">50 publicaciones</option>
+                <option value="100">100 publicaciones (Máximo)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="align-self: flex-end;">
+              <button id="btn-start-scrape" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Analizar perfil
+              </button>
+            </div>
+
+            <div class="form-group" style="align-self: flex-end;">
+              <button id="btn-cancel-scrape" class="btn btn-danger" style="display: none;">
+                Cancelar ejecución
+              </button>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="chk-download-images" checked>
+              <span>Descargar y validar imágenes locales (Pillow)</span>
+            </label>
+            <label class="custom-checkbox">
+              <input type="checkbox" id="chk-screenshot" checked>
+              <span>Generar captura de pantalla del perfil</span>
+            </label>
+          </div>
+
+          <!-- BARRA DE PROGRESO -->
+          <div class="progress-container">
+            <div id="job-progress-bar" class="progress-bar-fill"></div>
+          </div>
+        </section>
+
+        <!-- TARJETAS DE MÉTRICAS -->
+        <section class="metrics-grid">
+          <!-- 1. Seguidores -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Seguidores</span>
+              <div class="metric-icon" style="background: rgba(137, 54, 255, 0.15); color: var(--accent-purple);">👥</div>
+            </div>
+            <div id="metric-val-followers" class="metric-value unknown">—</div>
+            <div class="metric-footer">Número detectado en perfil</div>
+          </div>
+
+          <!-- 2. Seguidos -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Seguidos</span>
+              <div class="metric-icon" style="background: rgba(63, 140, 255, 0.15); color: var(--accent-blue);">👤</div>
+            </div>
+            <div id="metric-val-following" class="metric-value unknown">—</div>
+            <div class="metric-footer">Cuentas que sigue</div>
+          </div>
+
+          <!-- 3. Publicaciones Totales (Instagram) -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Publicaciones</span>
+              <div class="metric-icon" style="background: rgba(0, 210, 211, 0.15); color: var(--accent-cyan);">📊</div>
+            </div>
+            <div id="metric-val-total-posts" class="metric-value unknown">—</div>
+            <div class="metric-footer">Total indicado por Instagram</div>
+          </div>
+
+          <!-- 4. Publicaciones Recopiladas -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Recopiladas</span>
+              <div class="metric-icon" style="background: rgba(0, 196, 159, 0.15); color: var(--accent-green);">📥</div>
+            </div>
+            <div id="metric-val-collected-posts" class="metric-value unknown">—</div>
+            <div class="metric-footer">Identificadas en la cuadrícula</div>
+          </div>
+
+          <!-- 5. Imágenes Disponibles -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Imágenes Obtenidas</span>
+              <div class="metric-icon" style="background: rgba(255, 176, 32, 0.15); color: var(--accent-amber);">🖼️</div>
+            </div>
+            <div id="metric-val-images" class="metric-value unknown">—</div>
+            <div class="metric-footer">Descargadas y validadas</div>
+          </div>
+
+          <!-- 6. Estado de Extracción -->
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Estado Extracción</span>
+              <div class="metric-icon" style="background: rgba(255, 255, 255, 0.1); color: #fff;">⚡</div>
+            </div>
+            <div id="metric-val-status" class="metric-value unknown">Sin iniciar</div>
+            <div class="metric-footer">Resultado de la última etapa</div>
+          </div>
+        </section>
+
+        <!-- FILA DE DOS COLUMNAS: PERFIL & ACTIVIDAD -->
+        <div class="two-col-layout">
+          <!-- TARJETA DETALLADA DEL PERFIL -->
+          <section class="profile-card">
+            <div class="profile-header-group">
+              <div class="profile-avatar-container">
+                <img
+                  id="profile-avatar-img"
+                  class="profile-avatar-img"
+                  src="{{ url_for('static', filename='img/placeholder.svg') }}"
+                  alt="Avatar del perfil"
+                  onerror="this.src='/static/img/placeholder.svg';"
+                >
+              </div>
+              <div class="profile-names">
+                <div class="profile-username-row">
+                  <span id="profile-display-username" class="profile-username">@usuario</span>
+                  <span id="profile-verified-badge" class="badge-verified" style="display: none;" title="Cuenta verificada">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#3897f0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  </span>
+                </div>
+                <div id="profile-display-fullname" class="profile-fullname">Nombre no cargado</div>
+                <span id="profile-privacy-badge" class="profile-privacy-tag">Pública</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label">Biografía</label>
+              <div id="profile-display-bio" class="profile-bio"></div>
+            </div>
+
+            <div class="profile-actions">
+              <a id="profile-link-ig" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                Ver en Instagram ↗
+              </a>
+              <button id="btn-view-screenshot" class="btn btn-secondary" style="display: none;">
+                📷 Ver Captura
+              </button>
+            </div>
+          </section>
+
+          <!-- PANEL DE ACTIVIDAD Y ETAPAS -->
+          <section class="activity-card">
+            <div class="card-title-group">
+              <div class="card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                Etapas de Ejecución (Pipeline)
+              </div>
+              <span style="font-size: 12px; color: var(--text-muted);">16 etapas sincronizadas</span>
+            </div>
+
+            <!-- CONTENEDOR DE LAS 16 ETAPAS -->
+            <div id="stages-timeline-container" class="stages-timeline">
+              <div style="color: var(--text-muted); font-size: 13px; padding: 20px 0; text-align: center;">
+                Pulse «Analizar perfil» para ver el avance en tiempo real de las 16 etapas.
+              </div>
+            </div>
+
+            <!-- CONSOLA DE REGISTROS (LOGS LIVE) -->
+            <div>
+              <label class="form-label">Registro de Eventos en Vivo</label>
+              <div id="activity-logs-console" class="logs-console">
+                <div class="log-entry">
+                  <span class="log-time">[00:00:00]</span>
+                  <span class="log-msg info">Sistema InstaFlow listo. Esperando solicitud de extracción.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SECCIÓN DE LA GALERÍA DE PUBLICACIONES -->
+        <section id="gallery-section" class="gallery-section">
+          <!-- BARRA DE CONTROLES Y FILTROS -->
+          <div class="gallery-controls-card">
+            <div class="gallery-filter-group">
+              <div class="search-box-wrapper">
+                <span class="search-icon">🔍</span>
+                <input
+                  type="text"
+                  id="gallery-search-input"
+                  class="search-input"
+                  placeholder="Buscar en descripción..."
+                >
+              </div>
+
+              <div class="filter-pills">
+                <button class="filter-pill active" data-filter="all">Todas</button>
+                <button class="filter-pill" data-filter="photo">Fotos</button>
+                <button class="filter-pill" data-filter="carousel">Carruseles</button>
+                <button class="filter-pill" data-filter="reel">Vídeos / Reels</button>
+                <button class="filter-pill" data-filter="downloaded">Descargadas</button>
+              </div>
+            </div>
+
+            <div class="gallery-export-group">
+              <span id="gallery-posts-count" style="font-size: 13px; color: var(--text-muted); font-weight: 500;">
+                0 publicaciones
+              </span>
+              <button id="btn-export-csv" class="btn btn-secondary" disabled>
+                📥 Exportar CSV
+              </button>
+              <button id="btn-export-json" class="btn btn-secondary" disabled>
+                📄 Exportar JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- CUADRÍCULA DE TARJETAS DE PUBLICACIONES -->
+          <div id="posts-grid-container" class="posts-grid">
+            <div class="empty-gallery">
+              <div class="empty-gallery-icon">🖼️</div>
+              <div class="empty-gallery-title">Galería de publicaciones</div>
+              <div class="empty-gallery-desc">
+                Introduzca un perfil en el panel superior para extraer y visualizar las imágenes y publicaciones reales de Instagram.
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL: LIGHTBOX DE IMAGEN -->
+  <div id="modal-lightbox" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="modal-title">Vista Ampliada</span>
+        <button id="btn-close-lightbox" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modal-lightbox-img" src="" alt="Publicación ampliada">
+      </div>
+      <div id="modal-lightbox-caption" style="padding: 12px 20px; font-size: 13px; color: var(--text-secondary); background: var(--bg-card-elevated);"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: CAPTURA DE PANTALLA DEL PERFIL -->
+  <div id="modal-screenshot" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="modal-title">Captura del Perfil Analizado</span>
+        <button id="btn-close-screenshot-modal" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="modal-screenshot-img" src="" alt="Captura del perfil">
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/gallery.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InstaFlow • Configuración y Diagnóstico</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="app-sidebar">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">⚡</div>
+        <div>
+          <div class="brand-title">InstaFlow</div>
+          <div class="brand-subtitle">Scraping & Analytics</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <li class="nav-item">
+          <a href="/">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Detalle Perfil
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a href="/settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Configuración
+          </a>
+        </li>
+      </nav>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-header">
+        <h2 style="font-size: 16px; font-weight: 700;">Configuración del Sistema y Diagnóstico</h2>
+        <a href="/" class="btn btn-secondary">← Volver al Dashboard</a>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- DIAGNÓSTICO DEL SISTEMA -->
+        <section class="activity-card">
+          <h3 class="card-title">Diagnóstico de Entorno y Conectividad</h3>
+          <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="metric-card">
+              <span class="metric-title">Navegador Chrome</span>
+              <div id="diag-chrome" class="metric-value" style="font-size: 16px; color: var(--accent-green);">Detectando...</div>
+              <div id="diag-chrome-path" class="metric-footer">Ruta de binario</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-title">Archivo cookies.json</span>
+              <div id="diag-cookies" class="metric-value" style="font-size: 16px;">Verificando...</div>
+              <div class="metric-footer">Sesión autorizada local</div>
+            </div>
+            <div class="metric-card">
+              <span class="metric-title">Base de Datos SQLite</span>
+              <div id="diag-db" class="metric-value" style="font-size: 16px; color: var(--accent-green);">Conectada</div>
+              <div class="metric-footer">data/database/instaflow.db</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PARÁMETROS CENTRALIZADOS (CONFIG.PY) -->
+        <section class="activity-card">
+          <h3 class="card-title">Parámetros Centralizados (config.py)</h3>
+          <p style="color: var(--text-secondary); font-size: 13px;">
+            Todas las configuraciones se editan en el archivo <code>config.py</code> en la raíz del proyecto.
+          </p>
+          <div id="settings-json-view" class="logs-console" style="height: 220px; font-size: 12.5px;">
+            Cargando configuración...
+          </div>
+        </section>
+
+        <!-- PRIVACIDAD Y LIMPIEZA DE DATOS -->
+        <section class="activity-card" style="border-color: rgba(255, 69, 96, 0.3);">
+          <h3 class="card-title" style="color: var(--accent-red);">Zona de Privacidad y Limpieza de Datos</h3>
+          <p style="color: var(--text-secondary); font-size: 13px;">
+            Permite purgar de forma inmediata los registros históricos de SQLite, archivos JSON de resultados y capturas generadas localmente.
+          </p>
+          <div>
+            <button id="btn-clear-data" class="btn btn-danger">
+              🗑️ Limpiar Datos Locales
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Diagnóstico
+      const health = await InstaFlowAPI.checkHealth();
+      document.getElementById("diag-chrome").textContent = health.chrome_available ? "Disponible (Listo)" : "No detectado";
+      document.getElementById("diag-chrome").style.color = health.chrome_available ? "var(--accent-green)" : "var(--accent-red)";
+      document.getElementById("diag-chrome-path").textContent = health.chrome_path || "Gestionado por Selenium Manager";
+
+      document.getElementById("diag-cookies").textContent = health.cookies_present ? "Presente y Válido" : "No configurado (Modo Público)";
+      document.getElementById("diag-cookies").style.color = health.cookies_present ? "var(--accent-green)" : "var(--accent-amber)";
+
+      // 2. Settings
+      const settings = await InstaFlowAPI.getSettings();
+      document.getElementById("settings-json-view").textContent = JSON.stringify(settings, null, 2);
+
+      // 3. Limpieza
+      document.getElementById("btn-clear-data").addEventListener("click", async () => {
+        if (confirm("¿Está seguro de que desea eliminar todos los datos y archivos locales generados? Esta acción es irreversible.")) {
+          try {
+            await InstaFlowAPI.clearData();
+            alert("Datos locales purgados exitosamente.");
+            window.location.reload();
+          } catch (e) {
+            alert("Error al purgar datos: " + e.message);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

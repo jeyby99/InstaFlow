@@ -1,0 +1,299 @@
+/* ==========================================================================
+   INSTAFLOW - POST GALLERY STYLES
+   ========================================================================== */
+
+.gallery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* BARRA DE CONTROLES Y FILTROS */
+.gallery-controls-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.gallery-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.search-input {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 8px 12px 8px 32px;
+  min-width: 200px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px var(--accent-purple-glow);
+}
+
+.filter-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-pill {
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+  background-color: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.filter-pill.active {
+  background: rgba(137, 54, 255, 0.2);
+  border-color: var(--accent-purple);
+  color: #fff;
+}
+
+.gallery-export-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* CUADRÍCULA DE PUBLICACIONES */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.post-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(137, 54, 255, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* CONTENEDOR DE LA IMAGEN / MINIATURA */
+.post-media-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.post-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-img {
+  transform: scale(1.03);
+}
+
+/* INSIGNIAS DE TIPO DE MEDIO */
+.media-type-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(11, 12, 19, 0.85);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2;
+}
+
+.badge-carousel {
+  border-color: rgba(137, 54, 255, 0.4);
+  color: #c9a3ff;
+}
+
+.badge-reel {
+  border-color: rgba(255, 69, 96, 0.4);
+  color: #ff8b9e;
+}
+
+.badge-video {
+  border-color: rgba(63, 140, 255, 0.4);
+  color: #8bbdff;
+}
+
+.download-status-indicator {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+.dl-downloaded {
+  background: rgba(0, 196, 159, 0.85);
+  color: #fff;
+}
+
+.dl-failed {
+  background: rgba(255, 69, 96, 0.85);
+  color: #fff;
+}
+
+.dl-pending {
+  background: rgba(255, 176, 32, 0.85);
+  color: #fff;
+}
+
+/* CUERPO Y METADATOS DEL POST */
+.post-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.post-caption {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.post-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.post-counters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.post-counter-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-link-ig {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-link-ig:hover {
+  text-decoration: underline;
+}
+
+/* ESTADO VACÍO DE LA GALERÍA */
+.empty-gallery {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty-gallery-icon {
+  font-size: 36px;
+  color: var(--accent-purple);
+  opacity: 0.7;
+}
+
+.empty-gallery-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.empty-gallery-desc {
+  font-size: 13px;
+  max-width: 400px;
+}

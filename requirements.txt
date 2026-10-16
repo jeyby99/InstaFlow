@@ -1,0 +1,10 @@
+# InstaFlow - Requisitos de Dependencias Python
+# Compatible con Python 3.11, 3.12 y 3.13 en Windows / macOS / Linux
+
+Flask>=3.0.0,<4.0.0
+selenium>=4.20.0,<5.0.0
+pandas>=2.2.0,<3.0.0
+Pillow>=10.3.0,<12.0.0
+requests>=2.31.0,<3.0.0
+beautifulsoup4>=4.12.0,<5.0.0
+pytest>=8.0.0,<9.0.0

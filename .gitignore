@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# InstaFlow local runtime data and media
+media/profiles/*
+!media/profiles/.gitkeep
+media/posts/*
+!media/posts/.gitkeep
+screenshots/*
+!screenshots/.gitkeep
+data/results/*
+!data/results/.gitkeep
+data/database/*.db
+data/database/*.db-journal
+
+# Sensitive authentication files
+cookies.json
+*.cookie
+*.session
+instaflow-project.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
